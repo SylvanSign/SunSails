@@ -1,7 +1,5 @@
 :- use_module(library(http/json)).
 
-:- dynamic set/1.
-
 convert(Functor, InName, OutName) :-
   open(InName, read, InStream),
   open(OutName, write, OutStream),
