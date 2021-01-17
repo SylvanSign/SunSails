@@ -5,11 +5,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="js/tau-prolog.js" async></script>
+  <script src="js/tau-prolog.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://pengines.swi-prolog.org/pengine/pengines.js"></script>
+  <script type="text/x-prolog">
+      main :-
+          repeat,
+          pengine_input(X),
+          pengine_output(X),
+          X == stop.
+  </script>
+  <script>
+    var pengine = new Pengine({
+      oncreate: handleCreate,
+      onprompt: handlePrompt,
+      onoutput: handleOutput
+    });
+    function handleCreate() {
+      pengine.ask('main');
+    }
+    function handlePrompt() {
+      pengine.input(prompt(this.data));
+    }
+    function handleOutput() {
+      $('#out').html(this.data);
+    }
+  </script>
 </head>
 
 <body>
-
+  <h1>Pengine Example</h1>
+  <div id="out"></div>
 </body>
 
 </html>

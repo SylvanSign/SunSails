@@ -1,3 +1,6 @@
+run:
+	swipl -qg start server.pl
+
 build: cardnum dc knowledge/cards.pl knowledge/sets.pl knowledge/bans.pl
 
 .PHONY: pull
