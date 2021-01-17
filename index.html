@@ -5,37 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="js/tau-prolog.js"></script>
+
+  <!-- <script src="js/tau-prolog.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="https://pengines.swi-prolog.org/pengine/pengines.js"></script>
-  <script type="text/x-prolog">
-      main :-
-          repeat,
-          pengine_input(X),
-          pengine_output(X),
-          X == stop.
-  </script>
   <script>
     var pengine = new Pengine({
-      oncreate: handleCreate,
-      onprompt: handlePrompt,
-      onoutput: handleOutput
+      ask: "card(Card)",
+      onsuccess: handleSuccess
     });
-    function handleCreate() {
-      pengine.ask('main');
-    }
-    function handlePrompt() {
-      pengine.input(prompt(this.data));
-    }
-    function handleOutput() {
-      $('#out').html(this.data);
+    function handleSuccess() {
+      $('#out').attr('src', this.data[0].Card.DCpath);
+      $('#name').html(this.data[0].Card.NameEN);
+      if (!this.more) {
+        $('#next').attr("disabled", true);
+      }
     }
   </script>
 </head>
+</head>
 
 <body>
-  <h1>Pengine Example</h1>
-  <div id="out"></div>
+
+  <body>
+    <h2 id="name"></h2>
+    <img id="out" onclick="pengine.next()"></img>
+  </body>
 </body>
 
 </html>

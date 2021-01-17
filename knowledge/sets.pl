@@ -1,3 +1,5 @@
+:- module(sets, [set/1]).
+
 set(set{code:'METW',dreamcards:false,format:'General',name:'The Wizards',position:1,released:true}).
 set(set{code:'METD',dreamcards:false,format:'General',name:'The Dragons',position:2,released:true}).
 set(set{code:'MEDM',dreamcards:false,format:'General',name:'Dark Minions',position:3,released:true}).

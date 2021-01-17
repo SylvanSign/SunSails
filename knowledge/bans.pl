@@ -1,3 +1,5 @@
+:- module(bans, [ban/1]).
+
 ban(ban{'NameEN':'Bane of the Ithil-stone','Set':'METW',code:'metwbaneoftheithil-stone',effectedAlignment:'Wizards',playableAlignment:'Ringwraith',swapableAlignment:'',uneffectedAlignment:'Ringwraith',unplayableAlignment:''}).
 ban(ban{'NameEN':'Foul Fumes','Set':'METW',code:metwfoulfumes,effectedAlignment:'Wizards',playableAlignment:'Ringwraith',swapableAlignment:'',uneffectedAlignment:'Ringwraith',unplayableAlignment:''}).
 ban(ban{'NameEN':'Mûmak','Set':'METW',code:metwmumak,effectedAlignment:'Wizards',playableAlignment:'Ringwraith',swapableAlignment:'',uneffectedAlignment:'Ringwraith',unplayableAlignment:''}).
