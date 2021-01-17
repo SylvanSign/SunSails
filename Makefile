@@ -1,4 +1,9 @@
-build: knowledge/cards.pl knowledge/sets.pl knowledge/bans.pl
+build: cardnum dc knowledge/cards.pl knowledge/sets.pl knowledge/bans.pl
+
+.PHONY: pull
+pull:
+	cd cardnum && git pull
+	cd dc && git pull
 
 knowledge/cards.pl: cardnum/fdata/cards-dc.json
 	swipl \
@@ -6,6 +11,7 @@ knowledge/cards.pl: cardnum/fdata/cards-dc.json
 		json_list_to_prolog_facts.pl
 
 knowledge/sets.pl: cardnum/fdata/sets-dc.json
+
 	swipl \
 		-g "convert(set, 'cardnum/fdata/sets-dc.json', 'knowledge/sets.pl'), halt" \
 		json_list_to_prolog_facts.pl
@@ -15,6 +21,8 @@ knowledge/bans.pl: cardnum/fdata/bans-dc.json
 		-g "convert(ban, 'cardnum/fdata/bans-dc.json', 'knowledge/bans.pl'), halt" \
 		json_list_to_prolog_facts.pl
 
-.PHONY: update
-update:
-	cd cardnum && git pull
+cardnum:
+	git clone https://github.com/rezwits/cardnum.git
+
+dc:
+	git clone https://github.com/vastorper/dc.git
