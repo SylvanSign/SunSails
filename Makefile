@@ -1,5 +1,5 @@
 run:
-	swipl -qg start server.pl
+	swipl server.pl --port=8000 --interactive
 
 build: cardnum dc knowledge/cards.pl knowledge/sets.pl knowledge/bans.pl
 
