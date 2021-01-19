@@ -4,33 +4,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>MECCG Viewer</title>
+  <style>
+    body,
+    input {
+      font-family: monospace;
+      font-size: 14px;
+    }
 
+    input {
+      width: 100%;
+      padding: 4px;
+    }
+  </style>
   <!-- <script src="js/tau-prolog.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script src="https://pengines.swi-prolog.org/pengine/pengines.js"></script>
   <script>
-    var pengine = new Pengine({
-      ask: "card(Card)",
-      onsuccess: handleSuccess
-    });
-    function handleSuccess() {
-      $('#out').attr('src', this.data[0].Card.DCpath);
-      $('#name').html(this.data[0].Card.NameEN);
-      if (!this.more) {
-        $('#next').attr("disabled", true);
+    let pengine;
+    let queried = false;
+    let changedQuery = true;
+    function query() {
+      pengine = new Pengine({
+        ask: document.getElementById('query').value,
+        onsuccess() {
+          document.getElementById('name').innerHTML = this.data[0].C.NameEN;
+          document.getElementById('card').src = this.data[0].C.DCpath;
+        },
+      });
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter') {
+        if (!changedQuery) {
+          nextCard();
+        } else {
+          if (pengine) {
+            pengine.stop();
+          }
+          queried = false;
+          changedQuery = false;
+          nextCard();
+        }
+      } else {
+        changedQuery = true
+      }
+    }
+
+    function nextCard() {
+      if (queried) {
+        pengine.next();
+      } else {
+        query();
+        queried = true;
       }
     }
   </script>
-</head>
 </head>
 
 <body>
 
   <body>
-    <h2 id="name"></h2>
-    <img id="out" onclick="pengine.next()"></img>
+
+    <body>
+      <h3>Prolog query</h3>
+      <input type="text" id="query" value="card(C)" onkeydown="handleKey(event)" />
+      <h2 id="name"></h2>
+      <img id="card" onclick="nextCard()"></img>
+    </body>
   </body>
-</body>
 
 </html>
