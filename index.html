@@ -25,8 +25,10 @@
     let queried = false;
     let changedQuery = true;
     function query() {
+      const userQuery = document.getElementById('query').value.trim();
+      const ask = 'card(C)' + (userQuery === '' ? '' : `,${userQuery}`);
       pengine = new Pengine({
-        ask: document.getElementById('query').value,
+        ask,
         onsuccess() {
           document.getElementById('name').innerHTML = this.data[0].C.NameEN;
           document.getElementById('card').src = this.data[0].C.DCpath;
@@ -67,8 +69,8 @@
   <body>
 
     <body>
-      <h3>Prolog query</h3>
-      <input type="text" id="query" value="card(C)" onkeydown="handleKey(event)" />
+      <h3>card(C),</h3>
+      <input type="text" id="query" value="" onkeydown="handleKey(event)" autofocus />
       <h2 id="name"></h2>
       <img id="card" onclick="nextCard()"></img>
     </body>
