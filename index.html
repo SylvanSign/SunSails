@@ -23,7 +23,7 @@
   <script>
     let pengine;
     let queried = false;
-    let changedQuery = true;
+    let changedQuery = false;
     function query() {
       const userQuery = document.getElementById('query').value.trim();
       const ask = 'card(C)' + (userQuery === '' ? '' : `,${userQuery}`);
@@ -73,6 +73,10 @@
       <input type="text" id="query" value="" onkeydown="handleKey(event)" autofocus />
       <h2 id="name"></h2>
       <img id="card" onclick="nextCard()"></img>
+
+      <script>
+        nextCard()
+      </script>
     </body>
   </body>
 
